@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/pages/public/templates/master.xhtml">
+		<ui:define name="divMain">
+			<h:form id="settingsForm">
+				<p:dataTable id="settingsTable" value="#{settingBean.getSettingWithUser(permissionBean.getCurrentUser())}" var="setting" emptyMessage="#{bundle.noRecords}" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.hexcolor}" />
+						</f:facet>
+
+						<h:outputText value="#{setting.hexcolor}" />
+					</p:column>
+
+					<p:column>
+						<p:commandButton value="#{bundle.update}" icon="ui-icon-pencil" update=":settingUpdateDialogForm" onclick="PF('settingUpdateDialogWidget').show()" >
+							<f:setPropertyActionListener target="#{settingBean.setting}" value="#{setting}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+				<p:commandButton value="#{bundle.create} #{bundle.settings}" icon="ui-icon-plus" update=":settingCreateDialogForm"
+					actionListener="#{settingBean.resetSetting()}" onclick="PF('settingCreateDialogWidget').show()" />
+			</h:form>
+
+			<ui:include src="/pages/public/settings/dialogs/settingCreateDialog.xhtml" />
+			<ui:include src="/pages/public/settings/dialogs/settingUpdateDialog.xhtml" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
