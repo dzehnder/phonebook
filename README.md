@@ -1,8 +1,4 @@
-# phonebook
-School Project (Java Security Module)
-
-
-## JSFApp
+# JSFApp
 
 server.xml > * > Realm
 durch folgendes Ersetzen:
