@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Version;
 
 @Entity
-public class City implements Serializable {
+public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -16,7 +16,8 @@ public class City implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private String zip;
+	private String prename;
+	private String phonenumber;
 	
 	@Version
 	private long version;
@@ -40,11 +41,17 @@ public class City implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getZip() {
-		return zip;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
-	public void setZip(String zip) {
-		this.zip = zip;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+	public String getPrename() {
+		return prename;
+	}
+	public void setPrename(String prename) {
+		this.prename = prename;
 	}
 	
 }

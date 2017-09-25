@@ -7,15 +7,15 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import ch.gibm.entity.City;
-import ch.gibm.facade.CityFacade;
+import ch.gibm.entity.Contact;
+import ch.gibm.facade.ContactFacade;
 
-@FacesConverter(forClass = ch.gibm.entity.City.class)
+@FacesConverter(forClass = ch.gibm.entity.Contact.class)
 public class CityConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		CityFacade cityFacade = new CityFacade();
+		ContactFacade cityFacade = new ContactFacade();
 		int cityId;
 		
 		try {
@@ -34,7 +34,7 @@ public class CityConverter implements Converter {
 			return "";
 		}
 		
-		City city = (City) arg2;
+		Contact city = (Contact) arg2;
 		return String.valueOf(city.getId());
 	}
 

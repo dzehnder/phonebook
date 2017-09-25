@@ -6,8 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ch.gibm.entity.City;
-import ch.gibm.facade.CityFacade;
+import ch.gibm.entity.Contact;
+import ch.gibm.facade.ContactFacade;
 
 @ViewScoped
 @ManagedBean(name = "cityBean")
@@ -15,25 +15,25 @@ public class CityBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private City city;
-	private List<City> cities;
-	private CityFacade cityFacade;
+	private Contact city;
+	private List<Contact> cities;
+	private ContactFacade cityFacade;
 	
-	public City getCity() {
+	public Contact getCity() {
 		if (city == null) {
-			city = new City();
+			city = new Contact();
 		}
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(Contact city) {
 		this.city = city;
 	}
 	
 	
-	public CityFacade getCityFacade() {
+	public ContactFacade getCityFacade() {
 		if (cityFacade == null) {
-			cityFacade = new CityFacade();
+			cityFacade = new ContactFacade();
 		}
 		return cityFacade;
 	}
@@ -42,7 +42,7 @@ public class CityBean extends AbstractBean implements Serializable {
 		cities = getCityFacade().listAll();
 	}
 	
-	public List<City> getAllCities() {
+	public List<Contact> getAllCities() {
 		if (cities == null) {
 			loadCities();
 		}
@@ -50,7 +50,7 @@ public class CityBean extends AbstractBean implements Serializable {
 	}
 	
 	public void resetCity() {
-		city = new City();
+		city = new Contact();
 	}
 	
 	public void createCity() {
