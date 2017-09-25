@@ -1,6 +1,7 @@
 package ch.gibm.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,9 @@ public class Contact implements Serializable {
 	private String name;
 	private String prename;
 	private String phonenumber;
+	private Date birthday;
+	private boolean adReceiver;
+	private String description;
 	
 	@Version
 	private long version;
@@ -52,6 +56,24 @@ public class Contact implements Serializable {
 	}
 	public void setPrename(String prename) {
 		this.prename = prename;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public boolean isAdReceiver() {
+		return adReceiver;
+	}
+	public void setAdReceiver(boolean adReceiver) {
+		this.adReceiver = adReceiver;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<p:dialog widgetVar="cityDetailDialogWidget" id="cityDetailDialogId" height="150" width="500" modal="true"
+	<p:dialog widgetVar="contactDetailDialogWidget" id="contactDetailDialogId" height="150" width="500" modal="true"
 		closable="true" draggable="false" resizable="false">
-		<h:form id="cityDetailDialogForm" prependId="false">
+		<h:form id="contactDetailDialogForm" prependId="false">
 			<h:panelGrid columns="2">
-				<h:outputText value="#{bundle.cityName}" />
-				<h:outputText value="#{cityBean.city.name}" />
+				<h:outputText value="#{bundle.contactName}" />
+				<h:outputText value="#{contactBean.contact.name}" />
 
-				<p:commandButton value="#{bundle.ok}" icon="ui-icon-arrow-1-w" actionListener="#{cityBean.resetCity()}"
-					onclick="PF('cityDetailDialogWidget').hide()" />
+				<p:commandButton value="#{bundle.ok}" icon="ui-icon-arrow-1-w" actionListener="#{contactBean.resetContact()}"
+					onclick="PF('contactDetailDialogWidget').hide()" />
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>

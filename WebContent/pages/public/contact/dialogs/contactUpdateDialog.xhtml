@@ -5,22 +5,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<p:dialog widgetVar="cityUpdateDialogWidget"
-		id="cityUpdateDialogId" height="150" width="500" modal="true"
+	<p:dialog widgetVar="contactUpdateDialogWidget"
+		id="contactUpdateDialogId" height="150" width="500" modal="true"
 		closable="true" draggable="false" resizable="false">
-		<h:form id="cityUpdateDialogForm" prependId="false">
+		<h:form id="contactUpdateDialogForm" prependId="false">
 			<h:panelGrid columns="2">
-				<h:outputText value="* #{bundle.cityName}" />
-				<h:inputText value="#{cityBean.city.name}" required="true" label="#{bundle.cityName}" >
+				<h:outputText value="* #{bundle.contactName}" />
+				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}" >
 					<f:validateLength minimum="4" />
 				</h:inputText>
 		
 				<p:commandButton value="#{bundle.update}" icon="ui-icon-plus"
-					action="#{cityBean.updateCity()}"
-					update=":messageGrowl :citiesForm:citiesTable"
-					oncomplete="closeDialogIfSucess(xhr, status, args, PF('cityUpdateDialogWidget'), 'cityUpdateDialogId')" />
-				<p:commandButton value="#{bundle.cancel}" icon="ui-icon-cancel" actionListener="#{cityBean.resetCity()}"
-					onclick="PF('cityUpdateDialogWidget').hide()" type="button" />
+					action="#{contactBean.updateContact()}"
+					update=":messageGrowl :contactsForm:contactsTable"
+					oncomplete="closeDialogIfSucess(xhr, status, args, PF('contactUpdateDialogWidget'), 'contactUpdateDialogId')" />
+				<p:commandButton value="#{bundle.cancel}" icon="ui-icon-cancel" actionListener="#{contactBean.resetContact()}"
+					onclick="PF('contactUpdateDialogWidget').hide()" type="button" />
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>

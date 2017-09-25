@@ -11,41 +11,41 @@ public class ContactFacade implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private ContactDAO cityDAO = new ContactDAO();
+	private ContactDAO contactDAO = new ContactDAO();
 	
 	
 	public List<Contact> listAll() {
 		EntityManagerHelper.beginTransaction();
-		List<Contact> result = cityDAO.findAll();
+		List<Contact> result = contactDAO.findAll();
 		EntityManagerHelper.commitAndCloseTransaction();
 		return result;
 	}
 
-	public void createCity(Contact city) {
+	public void createContact(Contact contact) {
 		EntityManagerHelper.beginTransaction();
-		cityDAO.save(city);
+		contactDAO.save(contact);
 		EntityManagerHelper.commitAndCloseTransaction();
 	}
 	
-	public Contact findCity(int cityId) {
+	public Contact findContact(int contactId) {
 		EntityManagerHelper.beginTransaction();
-		Contact city = cityDAO.find(cityId);
+		Contact city = contactDAO.find(contactId);
 		EntityManagerHelper.commitAndCloseTransaction();
 		return city;
 	}
 	
-	public void updateCity(Contact city) {
+	public void updateContact(Contact contact) {
 		EntityManagerHelper.beginTransaction();
-		Contact newCity = EntityManagerHelper.getEntityManager().merge(city);
-		newCity.setName(city.getName());
-		cityDAO.update(newCity);
+		Contact newContact = EntityManagerHelper.getEntityManager().merge(contact);
+		newContact.setName(contact.getName());
+		contactDAO.update(newContact);
 		EntityManagerHelper.commitAndCloseTransaction();
 	}
 	
-	public void deleteCity(Contact city) {
+	public void deleteContact(Contact contact) {
 		EntityManagerHelper.beginTransaction();
-		Contact persistedLng = cityDAO.findReferenceOnly(city.getId());
-		cityDAO.delete(persistedLng);
+		Contact persistedLng = contactDAO.findReferenceOnly(contact.getId());
+		contactDAO.delete(persistedLng);
 		EntityManagerHelper.commitAndCloseTransaction();
 	}
 }

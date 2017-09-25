@@ -11,20 +11,20 @@ import ch.gibm.entity.Contact;
 import ch.gibm.facade.ContactFacade;
 
 @FacesConverter(forClass = ch.gibm.entity.Contact.class)
-public class CityConverter implements Converter {
+public class ContactConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		ContactFacade cityFacade = new ContactFacade();
-		int cityId;
+		ContactFacade contactFacade = new ContactFacade();
+		int contactId;
 		
 		try {
-			cityId = Integer.parseInt(arg2);			
+			contactId = Integer.parseInt(arg2);			
 		} catch (NumberFormatException e) {
 			throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot convert city object" , "Cannot convert city object"));
 		}
 		
-		return cityFacade.findCity(cityId);
+		return contactFacade.findContact(contactId);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class CityConverter implements Converter {
 			return "";
 		}
 		
-		Contact city = (Contact) arg2;
-		return String.valueOf(city.getId());
+		Contact contact = (Contact) arg2;
+		return String.valueOf(contact.getId());
 	}
 
 }

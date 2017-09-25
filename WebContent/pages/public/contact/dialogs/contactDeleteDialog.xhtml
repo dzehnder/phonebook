@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<p:dialog widgetVar="cityDeleteDialogWidget" id="cityDeleteDialogId" height="150" width="500" modal="true"
+	<p:dialog widgetVar="contactDeleteDialogWidget" id="contactDeleteDialogId" height="150" width="500" modal="true"
 		closable="true" draggable="false" resizable="false">
-		<h:form id="cityDeleteDialogForm" prependId="false">
-			#{bundle.deleteRecord}: <h:outputText value="#{cityBean.city.name}" /><br/><br/>
+		<h:form id="contactDeleteDialogForm" prependId="false">
+			#{bundle.deleteRecord}: <h:outputText value="#{contactBean.contact.name}" /><br/><br/>
 
-			<p:commandButton value="#{bundle.delete}" icon="ui-icon-plus" action="#{cityBean.deleteCity()}"
-				update=":messageGrowl :citiesForm:citiesTable"
-				oncomplete="closeDialogIfSucess(xhr, status, args, PF('cityDeleteDialogWidget'), 'cityDeleteDialogId')" />
-			<p:commandButton value="#{bundle.cancel}" icon="ui-icon-cancel" actionListener="#{cityBean.resetCity()}"
-				onclick="PF('cityDeleteDialogWidget').hide()" type="button" />
+			<p:commandButton value="#{bundle.delete}" icon="ui-icon-plus" action="#{contactBean.deleteContact()}"
+				update=":messageGrowl :contactsForm:contactsTable"
+				oncomplete="closeDialogIfSucess(xhr, status, args, PF('contactDeleteDialogWidget'), 'contactDeleteDialogId')" />
+			<p:commandButton value="#{bundle.cancel}" icon="ui-icon-cancel" actionListener="#{contactBean.resetContact()}"
+				onclick="PF('contactDeleteDialogWidget').hide()" type="button" />
 		</h:form>
 	</p:dialog>
 </h:body>

@@ -10,8 +10,8 @@ public class ContactDAO extends GenericDAO<Contact> {
 		super(Contact.class);
 	}
 	
-	public void delete(Contact city) {
-		super.delete(city.getId(), Contact.class);
+	public void delete(Contact contact) {
+		super.delete(contact.getId(), Contact.class);
 	}
 
 }
