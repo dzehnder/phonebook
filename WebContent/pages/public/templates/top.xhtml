@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jstl/core">
    <h:body>   
      <ui:composition>
      	<div id="topMessage">
@@ -13,6 +14,13 @@
 		     		Welcome to the HERZEHN phonebook
      			</h:form>
      		</h2>
+     	</div>
+     	<div id="loginButton">
+    			<c:set var="user" value="#{permissionBean.getCurrentUser()}"></c:set>
+    			<h:link rendered="#{user == null}" value="#{bundle.loginSubmit}" href="pages/public/login/login.xhtml" ajax="false"/>
+     		<h:form rendered="#{user != null}">
+     			<p:commandButton value="#{bundle.loginHello} #{user}" action="#{loginBean.logout}" ajax="false"/>
+     		</h:form>
      	</div>
      </ui:composition>   
    </h:body>

@@ -5,15 +5,19 @@
 	<ui:composition template="/pages/public/templates/master.xhtml">
 		<ui:define name="divMain">
 			<h:outputText rendered="#{param['loginFailed']}" value="#{bundle.loginFailed}" />
-			<form method="post" action="j_security_check">
-				<label>#{bundle.loginUsername}</label>
-				<input type="text" name="j_username" />
+			<h:form>
+				<h:outputText value="#{bundle.loginUsername}"/>
+				<h:inputText required="true" value="#{loginBean.username}" label="#{bundle.loginUsername}">
+					<f:validateLength maximum="20" />
+				</h:inputText>
 				<br />
-				<label>#{bundle.loginPassword}</label>
-				<input type="password" name="j_password" />
+				<h:outputText value="#{bundle.loginPassword}"/>
+				<h:inputSecret required="true" value="#{loginBean.password}" label="#{bundle.loginPassword}">
+				<f:validateLength maximum="20" />
+				</h:inputSecret>
 				<br />
-				<input type="submit" value="#{bundle.loginSubmit}" />
-			</form>
+				<p:commandButton value="#{bundle.loginSubmit}" action="#{loginBean.login}" ajax="false"/>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>
