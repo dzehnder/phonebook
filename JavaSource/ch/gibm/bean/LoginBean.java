@@ -41,7 +41,7 @@ public class LoginBean {
 	      context.addMessage(null, new FacesMessage("Username or Password incorrect."));
 	      return "error";
 	    }
-	    return "pages/public/index.xhtml";
+	    return "/pages/public/index.xhtml";
 	  }
 
 	  public void logout() {

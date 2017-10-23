@@ -17,9 +17,11 @@
      	</div>
      	<div id="loginButton">
     			<c:set var="user" value="#{permissionBean.getCurrentUser()}"></c:set>
-    			<h:link rendered="#{user == null}" value="#{bundle.loginSubmit}" href="pages/public/login/login.xhtml" ajax="false"/>
+    			<h:form rendered="#{user == null}">
+    				<p:commandButton value="#{bundle.loginSubmit}" action="/pages/public/login/login.xhtml"></p:commandButton>
+    			</h:form>
      		<h:form rendered="#{user != null}">
-     			<p:commandButton value="#{bundle.loginHello} #{user}" action="#{loginBean.logout}" ajax="false"/>
+     			<p:commandButton value="#{bundle.logout} #{user}" action="#{loginBean.logout}" ajax="false"/>
      		</h:form>
      	</div>
      </ui:composition>   
