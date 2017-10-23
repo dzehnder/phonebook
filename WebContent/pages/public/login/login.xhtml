@@ -9,11 +9,13 @@
 				<h:outputText value="#{bundle.loginUsername}"/>
 				<h:inputText required="true" value="#{loginBean.username}" label="#{bundle.loginUsername}">
 					<f:validateLength maximum="20" />
+					<f:validateLength minimum="3" />
 				</h:inputText>
 				<br />
 				<h:outputText value="#{bundle.loginPassword}"/>
 				<h:inputSecret required="true" value="#{loginBean.password}" label="#{bundle.loginPassword}">
-				<f:validateLength maximum="20" />
+				<f:validateLength maximum="40" />
+				<f:validateLength minimum="8" />
 				</h:inputSecret>
 				<br />
 				<p:commandButton value="#{bundle.loginSubmit}" action="#{loginBean.login}" ajax="false"/>
