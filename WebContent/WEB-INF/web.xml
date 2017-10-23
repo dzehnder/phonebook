@@ -17,6 +17,10 @@
     		<param-name>javax.faces.PROJECT_STAGE</param-name>
    		<param-value>Development</param-value>
  	</context-param>
+ 	<filter>
+  		<filter-name>XSSFilter</filter-name>
+  		<filter-class>ch.gibm.filter.XSSFilter</filter-class>
+	</filter>
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
@@ -25,12 +29,4 @@
 			<http-method>POST</http-method>
 		</web-resource-collection>
 	</security-constraint>
-	<session-config>
-		<session-timeout>30</session-timeout>
-		<cookie-config>
-			<http-only>true</http-only>
-			<secure>true</secure>
-		</cookie-config>
-		<tracking-mode>COOKIE</tracking-mode>
-	</session-config>
 </web-app>
