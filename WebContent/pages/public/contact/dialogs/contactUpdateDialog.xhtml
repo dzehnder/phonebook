@@ -11,7 +11,7 @@
 		<h:form id="contactUpdateDialogForm" prependId="false">
 			<h:panelGrid columns="2">
 				<h:outputText value="* #{bundle.contactName}" />
-				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}" >
+				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="4" />
 					<f:validateRegex pattern="^[A-Za-z '-éèàêôâ]+$"></f:validateRegex>
 				</h:inputText>

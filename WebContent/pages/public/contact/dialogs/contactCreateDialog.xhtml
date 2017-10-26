@@ -11,19 +11,19 @@
 		<h:form id="contactCreateDialogForm" prependId="false">
 			<h:panelGrid columns="2">
 				<h:outputText value="* #{bundle.contactName}" />
-				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}" >
+				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="4" />
 					<f:validateRegex pattern="^[A-Za-z '-éèàêôâ]+$"></f:validateRegex>
 				</h:inputText>
 				
 				<h:outputText value="* #{bundle.contactPrename}" />
-				<h:inputText value="#{contactBean.contact.prename}" required="true" label="#{bundle.contactPrename}" >
+				<h:inputText value="#{contactBean.contact.prename}" required="true" label="#{bundle.contactPrename}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="4" />
 					<f:validateRegex pattern="^[A-Za-z '-éèàêôâ]+$"></f:validateRegex>
 				</h:inputText>
 		
 				<h:outputText value="* #{bundle.contactPhone}" />
-				<h:inputText value="#{contactBean.contact.phonenumber}" required="true" label="#{bundle.contactPhone}" >
+				<h:inputText value="#{contactBean.contact.phonenumber}" required="true" label="#{bundle.contactPhone}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="10" />
 					<f:validateRegex pattern="\d{10}"></f:validateRegex>
 				</h:inputText>
@@ -38,7 +38,7 @@
 				</h:selectBooleanCheckbox>
 				
 				<h:outputText value="* #{bundle.contactDesc}" />
-				<h:inputText value="#{contactBean.contact.description}" required="true" label="#{bundle.contactDesc}" >
+				<h:inputText value="#{contactBean.contact.description}" required="true" label="#{bundle.contactDesc}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="5" />
 				</h:inputText>
 		
