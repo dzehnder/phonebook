@@ -13,7 +13,7 @@
 				<h:outputText value="* #{bundle.contactName}" />
 				<h:inputText value="#{contactBean.contact.name}" required="true" label="#{bundle.contactName}"  validatorMessage="Unallowed characters">
 					<f:validateLength minimum="4" />
-					<f:validateRegex pattern="^[A-Za-z '-éèàêôâ]+$"></f:validateRegex>
+					<f:validateRegex pattern="[A-Za-z '-éèàêôâ]+"></f:validateRegex>
 				</h:inputText>
 				
 				<h:outputText value="* #{bundle.contactPrename}" />
