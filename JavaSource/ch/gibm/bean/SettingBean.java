@@ -20,44 +20,58 @@ public class SettingBean extends AbstractBean implements Serializable {
 	//UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
 
 	public void createSetting() {
-		try {
-			getSettingFacade().createSetting(setting);
-			closeDialog();
-			displayInfoMessageToUser("Successfully created");
-			loadSetting();
-			resetSetting();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem has occured while saving. Please try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getSettingFacade().createSetting(setting);
+				closeDialog();
+				displayInfoMessageToUser("Successfully created");
+				loadSetting();
+				resetSetting();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem has occured while saving. Please try again later");
+				e.printStackTrace();
+			}
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
 	}
 	
 	public void updateSetting() {
-		try {
-			getSettingFacade().updateSetting(setting);
-			closeDialog();
-			displayInfoMessageToUser("Successfully updated");
-			loadSetting();
-			resetSetting();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem has occured while updating. Please try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getSettingFacade().updateSetting(setting);
+				closeDialog();
+				displayInfoMessageToUser("Successfully updated");
+				loadSetting();
+				resetSetting();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem has occured while updating. Please try again later");
+				e.printStackTrace();
+			}			
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
+		
 	}
 	
 	public void deletePerson() {
-		try {
-			getSettingFacade().deleteSetting(setting);
-			closeDialog();
-			displayInfoMessageToUser("Successfully deleted");
-			resetSetting();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem has occured while removing. Please try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getSettingFacade().deleteSetting(setting);
+				closeDialog();
+				displayInfoMessageToUser("Successfully deleted");
+				resetSetting();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem has occured while removing. Please try again later");
+				e.printStackTrace();
+			}			
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
+		
 	}
 	
 	public Setting getSetting() {

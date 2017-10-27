@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import ch.gibm.entity.Contact;
 import ch.gibm.facade.ContactFacade;
+import ch.gibm.util.PermissionUtil;
 
 @ViewScoped
 @ManagedBean(name = "contactBean")
@@ -54,44 +55,61 @@ public class ContactBean extends AbstractBean implements Serializable {
 	}
 	
 	public void createContact() {
-		try {
-			getContactFacade().createContact(contact);
-			closeDialog();
-			displayInfoMessageToUser("Successfully created new contact");
-			loadContacts();
-			resetContact();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem has occurred while saving. Please try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getContactFacade().createContact(contact);
+				closeDialog();
+				displayInfoMessageToUser("Successfully created new contact");
+				loadContacts();
+				resetContact();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem has occurred while saving. Please try again later");
+				e.printStackTrace();
+			}			
+			
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
+		
+		
 	}
 	
 	public void updateContact() {
-		try {
-			getContactFacade().updateContact(contact);
-			closeDialog();
-			displayInfoMessageToUser("Successfully updated contact");
-			loadContacts();
-			resetContact();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem has occurred while updating. Please try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getContactFacade().updateContact(contact);
+				closeDialog();
+				displayInfoMessageToUser("Successfully updated contact");
+				loadContacts();
+				resetContact();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem has occurred while updating. Please try again later");
+				e.printStackTrace();
+			}			
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
+		
 	}
 	
 	public void deleteContact() {
-		try {
-			getContactFacade().deleteContact(contact);
-			closeDialog();
-			displayInfoMessageToUser("Deleted contact with success");
-			loadContacts();
-			resetContact();
-		} catch (Exception e) {
-			keepDialogOpen();
-			displayErrorMessageToUser("A problem occurred while removing. Try again later");
-			e.printStackTrace();
+		if (PermissionUtil.isCurrentUserAdmin()) {
+			try {
+				getContactFacade().deleteContact(contact);
+				closeDialog();
+				displayInfoMessageToUser("Deleted contact with success");
+				loadContacts();
+				resetContact();
+			} catch (Exception e) {
+				keepDialogOpen();
+				displayErrorMessageToUser("A problem occurred while removing. Try again later");
+				e.printStackTrace();
+			}
+		} else {
+			displayErrorMessageToUser("Permission denied!");
 		}
+		
 	}
 }

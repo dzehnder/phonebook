@@ -1,78 +1,83 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jstl/core">
 <h:body>
 	<ui:composition template="/pages/public/templates/master.xhtml">
 		<ui:define name="divMain">
-			<h:form id="contactsForm">
-				<p:dataTable id="contactsTable" value="#{contactBean.allContacts}" var="contact" emptyMessage="#{bundle.noRecords}" paginator="true" rows="10"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactName}" />
-						</f:facet>
-						<h:outputText value="#{contact.name}" />
-					</p:column>
-					
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactPrename}" />
-						</f:facet>
-						<h:outputText value="#{contact.prename}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactPhone}" />
-						</f:facet>
-						<h:outputText value="#{contact.phonenumber}" />
-					</p:column>
-					
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactBirth}" />
-						</f:facet>
-						<h:outputText value="#{contact.birthday}" />
-					</p:column>
-					
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactAd}" />
-						</f:facet>
-						<h:outputText value="#{contact.adReceiver}" />
-					</p:column>
-					
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle.contactDesc}" />
-						</f:facet>
-						<h:outputText value="#{contact.description}" />
-					</p:column>
-
-					<p:column>
-						<p:commandButton value="#{bundle.detail}" icon="ui-icon-bullet" onclick="PF('contactDetailDialogWidget').show()" update=":contactDetailDialogForm" >
-							<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
-						</p:commandButton> 
-						<p:spacer width="10px" />
-						<p:commandButton value="#{bundle.update}" icon="ui-icon-pencil" update=":contactUpdateDialogForm" onclick="PF('contactUpdateDialogWidget').show()" >
-							<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
-						</p:commandButton>
-						<p:spacer width="10px" />
-						<p:commandButton value="#{bundle.delete}" icon="ui-icon-trash" update=":contactDeleteDialogForm" onclick="PF('contactDeleteDialogWidget').show()" >
-							<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
-						</p:commandButton>
-					</p:column>
-
-				</p:dataTable>
-				<p:commandButton value="#{bundle.create} #{bundle.contact}" icon="ui-icon-plus" update=":contactCreateDialogForm"
-					actionListener="#{contactBean.resetContact()}" onclick="PF('contactCreateDialogWidget').show()" />
-			</h:form>
-
-			<ui:include src="/pages/public/contact/dialogs/contactCreateDialog.xhtml" />
-			<ui:include src="/pages/public/contact/dialogs/contactUpdateDialog.xhtml" />
-			<ui:include src="/pages/public/contact/dialogs/contactDeleteDialog.xhtml" />
-			<ui:include src="/pages/public/contact/dialogs/contactDetailDialog.xhtml" />
+			<c:set var="user" value="#{permissionBean.getCurrentUser()}"></c:set>
+			<c:set var="isAdmin" value="#{permissionBean.isCurrentUserAdmin()}"></c:set>
+			<ui:fragment rendered="#{user != null}">
+				<h:form id="contactsForm">
+					<p:dataTable id="contactsTable" value="#{contactBean.allContacts}" var="contact" emptyMessage="#{bundle.noRecords}" paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactName}" />
+							</f:facet>
+							<h:outputText value="#{contact.name}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactPrename}" />
+							</f:facet>
+							<h:outputText value="#{contact.prename}" />
+						</p:column>
+		
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactPhone}" />
+							</f:facet>
+							<h:outputText value="#{contact.phonenumber}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactBirth}" />
+							</f:facet>
+							<h:outputText value="#{contact.birthday}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactAd}" />
+							</f:facet>
+							<h:outputText value="#{contact.adReceiver}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bundle.contactDesc}" />
+							</f:facet>
+							<h:outputText value="#{contact.description}" />
+						</p:column>
+		
+						<p:column>
+							<p:commandButton value="#{bundle.detail}" icon="ui-icon-bullet" onclick="PF('contactDetailDialogWidget').show()" update=":contactDetailDialogForm" >
+								<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
+							</p:commandButton> 
+							<p:spacer width="10px" />
+							<p:commandButton rendered="#{isAdmin}" value="#{bundle.update}" icon="ui-icon-pencil" update=":contactUpdateDialogForm" onclick="PF('contactUpdateDialogWidget').show()" >
+								<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
+							</p:commandButton>
+							<p:spacer width="10px" />
+							<p:commandButton rendered="#{isAdmin}" value="#{bundle.delete}" icon="ui-icon-trash" update=":contactDeleteDialogForm" onclick="PF('contactDeleteDialogWidget').show()" >
+								<f:setPropertyActionListener target="#{contactBean.contact}" value="#{contact}" />
+							</p:commandButton>
+						</p:column>
+		
+					</p:dataTable>
+					<p:commandButton rendered="#{isAdmin}" value="#{bundle.create} #{bundle.contact}" icon="ui-icon-plus" update=":contactCreateDialogForm"
+						actionListener="#{contactBean.resetContact()}" onclick="PF('contactCreateDialogWidget').show()" />
+				</h:form>
+				<ui:fragment rendered="#{isAdmin}">
+					<ui:include src="/pages/public/contact/dialogs/contactCreateDialog.xhtml" />
+					<ui:include src="/pages/public/contact/dialogs/contactUpdateDialog.xhtml" />
+					<ui:include src="/pages/public/contact/dialogs/contactDeleteDialog.xhtml" />
+				</ui:fragment>
+				<ui:include src="/pages/public/contact/dialogs/contactDetailDialog.xhtml" />
+			</ui:fragment>
 		</ui:define>
 	</ui:composition>
 </h:body>
