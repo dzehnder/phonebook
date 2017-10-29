@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import ch.gibm.entity.User;
 import ch.gibm.facade.UserFacade;
 
@@ -26,6 +28,7 @@ import ch.gibm.facade.UserFacade;
 public class LoginBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private final Logger logger = Logger.getLogger(LoginBean.class);
 	
 	private User user;
 	private UserFacade userFacade;
@@ -90,8 +93,9 @@ public class LoginBean extends AbstractBean implements Serializable {
 		try {
 			request.login(this.username, pass);
 		} catch (ServletException e) {
-	      context.addMessage(null, new FacesMessage("Username or Password incorrect."));
-	      return "error";
+			logger.error(e);
+			context.addMessage(null, new FacesMessage("Username or Password incorrect."));
+			return "error";
 	    }
 	    return "/pages/public/index.xhtml";
 	  }
@@ -112,8 +116,8 @@ public class LoginBean extends AbstractBean implements Serializable {
 	    try {
 	    		request.logout();
 	    } catch (ServletException e) {
-	      
-	      context.addMessage(null, new FacesMessage("Logout failed."));
+	    		logger.error(e);
+	    		context.addMessage(null, new FacesMessage("Logout failed."));
 	    }
 	  }
 	  
@@ -161,6 +165,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 				loadUsers();
 				resetUser();
 			} catch (Exception e) {
+				logger.error(e);
 				keepDialogOpen();
 				displayErrorMessageToUser("A problem has occurred while creating new user. Please try again later");
 				e.printStackTrace();
@@ -182,7 +187,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 			  SecretKey key = secretKeyFactory.generateSecret(spec);
 			  pw = new String(key.getEncoded());			  
 		  } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			e.printStackTrace();
+			  logger.error(e);
 		}
 		  
 		return pw;

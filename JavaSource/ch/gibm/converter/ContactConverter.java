@@ -7,12 +7,16 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import org.apache.log4j.Logger;
+
 import ch.gibm.entity.Contact;
 import ch.gibm.facade.ContactFacade;
 
 @FacesConverter(forClass = ch.gibm.entity.Contact.class)
 public class ContactConverter implements Converter {
 
+	private final Logger logger = Logger.getLogger(getClass()); 
+	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		ContactFacade contactFacade = new ContactFacade();
@@ -21,6 +25,7 @@ public class ContactConverter implements Converter {
 		try {
 			contactId = Integer.parseInt(arg2);			
 		} catch (NumberFormatException e) {
+			logger.error(e);
 			throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot convert city object" , "Cannot convert city object"));
 		}
 		

@@ -11,8 +11,11 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.apache.log4j.Logger;
+
 abstract class GenericDAO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private final Logger logger = Logger.getLogger(getClass());
 
 	private Class<T> entityClass;
 
@@ -64,9 +67,9 @@ abstract class GenericDAO<T> implements Serializable {
 			result = query.getSingleResult();
 
 		} catch (NoResultException e) {
-			System.out.println("No result found for named query: " + namedQuery);
+			logger.error("No result found for named query: " + namedQuery + e);
 		} catch (Exception e) {
-			System.out.println("Error while running query: " + e.getMessage());
+			logger.error("Error while running query: " + e);
 			e.printStackTrace();
 		}
 
