@@ -15,7 +15,6 @@ public class ContactFacade implements Serializable {
 	
 	
 	public List<Contact> listAll() {
-		System.out.println("LIST");
 		EntityManagerHelper.beginTransaction();
 		List<Contact> result = contactDAO.findAll();
 		EntityManagerHelper.commitAndCloseTransaction();

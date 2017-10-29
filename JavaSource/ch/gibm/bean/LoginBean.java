@@ -95,7 +95,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 		} catch (ServletException e) {
 			logger.error(e);
 			context.addMessage(null, new FacesMessage("Username or Password incorrect."));
-			return "error";
+			return "/pages/public/login/login.xhtml";
 	    }
 	    return "/pages/public/index.xhtml";
 	  }
