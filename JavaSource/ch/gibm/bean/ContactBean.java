@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.log4j.Logger;
+
 import ch.gibm.entity.Contact;
 import ch.gibm.facade.ContactFacade;
 import ch.gibm.util.PermissionUtil;
@@ -15,7 +17,7 @@ import ch.gibm.util.PermissionUtil;
 public class ContactBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	private final Logger logger = Logger.getLogger(ContactBean.class);
 	private Contact contact;
 	private List<Contact> contacts;
 	private ContactFacade contactFacade;
@@ -60,11 +62,13 @@ public class ContactBean extends AbstractBean implements Serializable {
 				getContactFacade().createContact(contact);
 				closeDialog();
 				displayInfoMessageToUser("Successfully created new contact");
+				logger.info("Successfully created new contact with id " + contact.getId());
 				loadContacts();
 				resetContact();
 			} catch (Exception e) {
 				keepDialogOpen();
 				displayErrorMessageToUser("A problem has occurred while saving. Please try again later");
+				logger.warn("A problem has occurred while saving. Please try again later with id " + contact.getId());
 				e.printStackTrace();
 			}			
 			
@@ -81,11 +85,13 @@ public class ContactBean extends AbstractBean implements Serializable {
 				getContactFacade().updateContact(contact);
 				closeDialog();
 				displayInfoMessageToUser("Successfully updated contact");
+				logger.info("Successfully updated contact with id " + contact.getId());
 				loadContacts();
 				resetContact();
 			} catch (Exception e) {
 				keepDialogOpen();
 				displayErrorMessageToUser("A problem has occurred while updating. Please try again later");
+				logger.warn("A problem has occurred while updating. Please try again later with id " + contact.getId());
 				e.printStackTrace();
 			}			
 		} else {

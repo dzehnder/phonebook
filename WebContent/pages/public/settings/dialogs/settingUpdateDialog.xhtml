@@ -11,7 +11,7 @@
 		<h:form id="settingUpdateDialogForm" prependId="false">
 			<h:panelGrid columns="2">
 				<h:outputText value="* #{bundle.hexcolor}" />
-				<h:inputText value="#{settingBean.setting.hexcolor}" required="true" label="#{bundle.hexcolor}" validatorMessage="Unallowed characters" >
+				<h:inputText value="#{settingBean.setting.hexcolor}" required="true" label="#{bundle.hexcolor}" validatorMessage="Wrong HEX-Value" >
 					<f:validateLength minimum="6" maximum="6" />
 					<f:validateRegex pattern="([a-fA-F0-9])\w+"></f:validateRegex>
 				</h:inputText>

@@ -83,6 +83,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 		User saltUser = getSaltWithUser(this.username);
 		if (saltUser == null) {
 			context.addMessage(null, new FacesMessage("Username or Password incorrect."));
+			logger.warn("User " + this.username + " used wrong credentials.");
 			this.password = null;
 			return "/pages/public/login/login.xhtml";
 		}
@@ -92,6 +93,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 		
 		try {
 			request.login(this.username, pass);
+			logger.info("User " + this.username + " logged in.");
 		} catch (ServletException e) {
 			logger.error(e);
 			context.addMessage(null, new FacesMessage("Username or Password incorrect."));
@@ -115,6 +117,7 @@ public class LoginBean extends AbstractBean implements Serializable {
 	    
 	    try {
 	    		request.logout();
+	    		logger.info("Log out user" + this.username);
 	    } catch (ServletException e) {
 	    		logger.error(e);
 	    		context.addMessage(null, new FacesMessage("Logout failed."));
